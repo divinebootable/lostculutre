@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -28,6 +28,8 @@ export default function LoginView() {
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleClick = () => {
     router.push('/dashboard');
@@ -103,7 +105,15 @@ export default function LoginView() {
 
           <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
             Don’t have an account?
-            <Link to="/signup" variant="subtitle2" sx={{ ml: 0.5 }}>
+            <Link
+              to="/signup"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/signup');
+              }}
+              variant="subtitle2"
+              sx={{ ml: 0.5 }}
+            >
               Get started
             </Link>
           </Typography>
