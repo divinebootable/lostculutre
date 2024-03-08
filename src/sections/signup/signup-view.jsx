@@ -39,7 +39,6 @@ export default function SignUpView() {
         <TextField name="first_name" label="First name" />
         <TextField name="last_name" label="Last name" />
         <TextField name="email" label="Email address" />
-        <TextField name="password" label="Password" />
 
         <TextField
           name="password"
