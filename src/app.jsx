@@ -31,7 +31,7 @@ export default function App() {
       }
     } else {
       console.log('loop');
-      navigate('/signup', { replace: true });
+      navigate('/', { replace: true });
       return false;
     }
   }, [token, isLoggedIn, navigate]);

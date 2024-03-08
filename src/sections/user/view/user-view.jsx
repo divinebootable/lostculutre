@@ -100,7 +100,7 @@ export default function UserPage() {
         <Typography variant="h4">Users</Typography>
 
         <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
-          New User
+          Add Contestant
         </Button>
       </Stack>
 

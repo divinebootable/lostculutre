@@ -28,8 +28,8 @@ export default function AppView() {
       <Grid container spacing={3}>
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Weekly Sales"
-            total={714000}
+            title="Total Contestants"
+            total={20}
             color="success"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />}
           />
@@ -37,7 +37,7 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="New Users"
+            title="Total Votes"
             total={1352831}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_users.png" />}
@@ -46,7 +46,7 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Item Orders"
+            title="Account Balance"
             total={1723315}
             color="warning"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_buy.png" />}
@@ -55,7 +55,7 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Bug Reports"
+            title="Pending accounts"
             total={234}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
@@ -64,7 +64,7 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={8}>
           <AppWebsiteVisits
-            title="Website Visits"
+            title="Lost Culture Analytics"
             subheader="(+43%) than last year"
             chart={{
               labels: [
@@ -120,19 +120,19 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={8}>
           <AppConversionRates
-            title="Conversion Rates"
-            subheader="(+43%) than last year"
+            title="Participants per region"
+            subheader="last 3 months"
             chart={{
               series: [
-                { label: 'Italy', value: 400 },
-                { label: 'Japan', value: 430 },
-                { label: 'China', value: 448 },
-                { label: 'Canada', value: 470 },
-                { label: 'France', value: 540 },
-                { label: 'Germany', value: 580 },
-                { label: 'South Korea', value: 690 },
-                { label: 'Netherlands', value: 1100 },
-                { label: 'United States', value: 1200 },
+                { label: 'Littoral', value: 400 },
+                { label: 'Centre', value: 430 },
+                { label: 'West', value: 448 },
+                { label: 'Adamawa', value: 470 },
+                { label: 'East', value: 540 },
+                { label: 'Nord', value: 580 },
+                { label: 'South West', value: 690 },
+                { label: 'Extreme Nord', value: 1100 },
+                { label: 'Nord West', value: 1200 },
                 { label: 'United Kingdom', value: 1380 },
               ],
             }}
