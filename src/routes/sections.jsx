@@ -3,6 +3,10 @@ import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
 import DashboardLayout from 'src/layouts/dashboard';
 
+import About from '../pages/About';
+import HomePage from '../pages/HomePage';
+
+
 export const IndexPage = lazy(() => import('src/pages/app'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
 export const UserPage = lazy(() => import('src/pages/user'));
@@ -41,6 +45,14 @@ export default function Router() {
     {
       path: '404',
       element: <Page404 />,
+    },
+    {
+      path:'/home',
+      element: <HomePage />,
+    },
+    {
+      path:'/about',
+      element: <About />,
     },
     {
       path: '*',
