@@ -32,9 +32,10 @@ export default function App() {
     } else {
       console.log('loop');
       navigate('/signup', { replace: true });
-      return false;
+      return true;
     }
   }, [token, isLoggedIn, navigate]);
+
   useEffect(() => {
     AccessToken();
   }, [AccessToken]);

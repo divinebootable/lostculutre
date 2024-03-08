@@ -7,7 +7,8 @@
   "plugins": [
     "perfectionist",
     "unused-imports",
-    "prettier"
+    "prettier",
+    "import"
   ],
   "extends": [
     "airbnb",

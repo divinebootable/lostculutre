@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -28,8 +28,6 @@ export default function LoginView() {
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState(false);
-
-  const navigate = useNavigate();
 
   const handleClick = () => {
     router.push('/dashboard');
@@ -101,19 +99,11 @@ export default function LoginView() {
             maxWidth: 420,
           }}
         >
-          <Typography variant="h4">Sign in to Minimal</Typography>
+          <Typography variant="h4">Sign in</Typography>
 
           <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
             Don’t have an account?
-            <Link
-              to="/signup"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate('/signup');
-              }}
-              variant="subtitle2"
-              sx={{ ml: 0.5 }}
-            >
+            <Link href="/signup" variant="subtitle2" sx={{ ml: 0.5 }}>
               Get started
             </Link>
           </Typography>
