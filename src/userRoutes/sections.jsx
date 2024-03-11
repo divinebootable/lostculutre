@@ -24,18 +24,18 @@ export default function RouterUser() {
         </DashboardLayout>
       ),
       children: [
-        { element: <IndexPage />, index: true },
-        { path: 'user', element: <UserPage /> },
-        { path: 'products', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
+        { path: '/', element: <IndexPage />, index: true },
+        { path: '/user', element: <UserPage /> },
+        { path: '/products', element: <ProductsPage /> },
+        { path: '/blog', element: <BlogPage /> },
       ],
     },
     {
-      path: 'login',
+      path: '/login',
       element: <LoginPage />,
     },
     {
-      path: 'signup',
+      path: '/signup',
       element: <SignupPage />,
     },
     {

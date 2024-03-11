@@ -1,10 +1,11 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
 import { Form, useFormik, FormikProvider } from 'formik';
 
 import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -193,7 +194,7 @@ export default function SignUpView() {
 
           <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
             Already have an account?
-            <Link to="/login" variant="subtitle2" sx={{ ml: 0.5 }}>
+            <Link to="/login" component={RouterLink} variant="subtitle2" sx={{ ml: 0.5 }}>
               Login
             </Link>
           </Typography>

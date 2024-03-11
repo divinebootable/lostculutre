@@ -3,25 +3,18 @@ import axios from 'axios';
 import api from '../serverConfig';
 
 const signup = (first_name, last_name, email, password) => {
+  const telephone = 67774711;
   console.log(first_name, last_name, email, password);
   return axios
-    .post(
-      api.SIGNUP,
-      {
-        first_name,
-        last_name,
-        email,
-        password,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-      }
-    )
+    .post(api.SIGNUP, {
+      first_name,
+      last_name,
+      email,
+      password,
+      telephone,
+    })
     .then((res) => {
-      console.long(res);
+      console.log(res);
     })
     .catch((e) => {
       console.log(e);

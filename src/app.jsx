@@ -32,7 +32,7 @@ export default function App() {
     } else {
       console.log('loop');
       navigate('/signup', { replace: true });
-      return true;
+      return false;
     }
   }, [token, isLoggedIn, navigate]);
 
