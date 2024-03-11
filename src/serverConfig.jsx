@@ -1,4 +1,4 @@
-const URL = `http://localhost:8080/`;
+const URL = ` https://agro.pythonanywhere.com/`;
 
 export default {
   // AUTHENTICATION
