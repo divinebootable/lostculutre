@@ -171,6 +171,7 @@ export default function SignUpView() {
           imgUrl: '/assets/background/overlay_4.jpg',
         }),
         height: 1,
+        mt: 20,
       }}
     >
       <Logo
