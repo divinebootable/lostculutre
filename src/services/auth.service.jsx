@@ -37,6 +37,7 @@ const login = (email, password) => {
       withCredentials: true,
     })
     .then((data) => {
+      localStorage.setItem('userToken', data.token);
       console.log(data);
       return data;
     })
