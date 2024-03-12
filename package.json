@@ -30,6 +30,7 @@
     "apexcharts": "^3.43.0",
     "axios": "^1.6.7",
     "date-fns": "^2.30.0",
+    "formik": "^2.4.5",
     "history": "^5.3.0",
     "lodash": "^4.17.21",
     "numeral": "^2.0.6",
@@ -41,7 +42,8 @@
     "react-hook-form": "^7.47.0",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.16.0",
-    "simplebar-react": "^3.2.4"
+    "simplebar-react": "^3.2.4",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react-swc": "^3.4.0",
