@@ -1,9 +1,10 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Form, useFormik, FormikProvider } from 'formik';
 
 import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -18,9 +19,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 // import { useRouter } from 'src/routes/hooks';
 
 import { bgGradient } from 'src/theme/css';
+import { signup } from 'src/features/authentication/authSlice';
 
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
+// import { error } from 'src/theme/palette';
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +31,8 @@ export default function SignUpView() {
   const theme = useTheme();
 
   //   const router = useRouter()
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -57,8 +61,16 @@ export default function SignUpView() {
       confirm_password: '',
     },
     validationSchema: RegisterSchema,
-    handleClick: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: () => {
+      const { first_name, last_name, email, password } = formik.values;
+      console.log(first_name, last_name, email, password);
+      dispatch(signup({ first_name, last_name, email, password }))
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   });
 
@@ -159,6 +171,7 @@ export default function SignUpView() {
           imgUrl: '/assets/background/overlay_4.jpg',
         }),
         height: 1,
+        mt: 20,
       }}
     >
       <Logo
@@ -181,7 +194,7 @@ export default function SignUpView() {
 
           <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
             Already have an account?
-            <Link to="/login" variant="subtitle2" sx={{ ml: 0.5 }}>
+            <Link href="login" variant="subtitle2" sx={{ ml: 0.5 }}>
               Login
             </Link>
           </Typography>
