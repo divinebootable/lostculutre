@@ -1,7 +1,12 @@
 import { lazy, Suspense } from 'react';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
+import SingUpPage from 'src/pages/signup';
 import DashboardLayout from 'src/layouts/dashboard';
+import LogoOnlyLayout from 'src/layouts/auth-layout';
+
+import About from '../pages/About';
+import HomePage from '../pages/HomePage';
 
 export const IndexPage = lazy(() => import('src/pages/app'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
@@ -24,23 +29,28 @@ export default function Router() {
         </DashboardLayout>
       ),
       children: [
-        { element: <IndexPage />, index: true },
+        { path: '/', element: <IndexPage /> },
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
       ],
     },
     {
-      path: 'login',
-      element: <LoginPage />,
+      path: 'auth',
+      element: <LogoOnlyLayout />,
+      children: [
+        { path: 'login', element: <LoginPage /> },
+        { path: 'signup', element: <SingUpPage /> },
+        { path: '404', element: <Page404 /> },
+      ],
     },
     {
-      path: 'signup',
-      element: <SignupPage />,
+      path: '/home',
+      element: <HomePage />,
     },
     {
-      path: '404',
-      element: <Page404 />,
+      path: '/about',
+      element: <About />,
     },
     {
       path: '*',

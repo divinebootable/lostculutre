@@ -1,8 +1,10 @@
 import { lazy, Suspense } from 'react';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
-import DashboardLayout from 'src/layouts/dashboard';
+import DashboardLayout from 'src/layouts/userDashboard';
 
+export const Register = lazy(() => import('src/pages/register'));
+export const Analytics = lazy(() => import('src/pages/analytics'));
 export const IndexPage = lazy(() => import('src/pages/app'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
 export const UserPage = lazy(() => import('src/pages/user'));
@@ -24,18 +26,20 @@ export default function RouterUser() {
         </DashboardLayout>
       ),
       children: [
-        { element: <IndexPage />, index: true },
-        { path: 'user', element: <UserPage /> },
-        { path: 'products', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
+        { path: '/', element: <IndexPage />, index: true },
+        { path: 'analytics', element: <Analytics /> },
+        { path: 'register', element: <Register /> },
+        { path: '/user', element: <UserPage /> },
+        { path: '/products', element: <ProductsPage /> },
+        { path: '/blog', element: <BlogPage /> },
       ],
     },
     {
-      path: 'login',
+      path: '/login',
       element: <LoginPage />,
     },
     {
-      path: 'signup',
+      path: '/signup',
       element: <SignupPage />,
     },
     {

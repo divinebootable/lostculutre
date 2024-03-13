@@ -3,6 +3,7 @@ import axios from 'axios';
 import api from '../serverConfig';
 
 const signup = (first_name, last_name, email, password) => {
+  const telephone = 67774711;
   console.log(first_name, last_name, email, password);
   return axios
     .post(api.SIGNUP, {
@@ -10,11 +11,13 @@ const signup = (first_name, last_name, email, password) => {
       last_name,
       email,
       password,
+      telephone,
     })
     .then((res) => {
-      console.long(res);
+      console.log(res);
     })
     .catch((e) => {
+      console.log(e);
       throw e;
     });
 };
@@ -34,6 +37,7 @@ const login = (email, password) => {
       withCredentials: true,
     })
     .then((data) => {
+      localStorage.setItem('userToken', data.token);
       console.log(data);
       return data;
     })

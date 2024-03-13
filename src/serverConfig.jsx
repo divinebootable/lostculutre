@@ -1,8 +1,8 @@
-const URL = `http://localhost:8080/`;
+const URL = `https://agro.pythonanywhere.com/`;
 
 export default {
   // AUTHENTICATION
-  SIGNUP: `${URL}signup`,
+  SIGNUP: `${URL}signup/`,
   SIGNIN: `${URL}signin`,
 
   //   REGISTRATION FOR COMPETITION

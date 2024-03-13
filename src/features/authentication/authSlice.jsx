@@ -23,11 +23,13 @@ export const login = createAsyncThunk('auth/login', async ({ email, password }, 
   }
 });
 
+const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
+
 const initialState = {
   isLoggedIn: true,
   isLoading: false,
   user: [], // for user object
-  token: '', // for storing the JWT access token
+  token, // for storing the JWT access token
   isSuccess: false, // for monitoring the registration process.
 };
 
@@ -45,6 +47,22 @@ const authSlice = createSlice({
     builder.addCase(signup.rejected, (state, action) => {
       // Add user to the state array
       state.isLoading = false;
+    });
+    builder.addCase(signup.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isLoggedIn = true;
+      state.user = action.payload.token;
+      state.user.push(action.payload);
+    });
+    builder.addCase(login.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(login.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isLoggedIn = false;
     });
   },
 });
