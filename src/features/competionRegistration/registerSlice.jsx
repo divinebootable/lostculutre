@@ -24,13 +24,10 @@ export const register = createAsyncThunk(
   }
 );
 
-const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
-
 const initialState = {
   isLoggedIn: false,
   isLoading: false,
   user: [], // for user object
-  token, // for storing the JWT access token
   isSuccess: false, // for monitoring the registration process.
 };
 
