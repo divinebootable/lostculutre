@@ -5,6 +5,10 @@ import SingUpPage from 'src/pages/signup';
 import DashboardLayout from 'src/layouts/dashboard';
 import LogoOnlyLayout from 'src/layouts/auth-layout';
 
+import About from '../pages/About';
+import HomePage from '../pages/HomePage';
+
+
 export const IndexPage = lazy(() => import('src/pages/app'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
 export const UserPage = lazy(() => import('src/pages/user'));
@@ -43,6 +47,14 @@ export default function Router() {
       ],
     },
     { path: '/dashboard', element: <Navigate to="/dashboard/app" /> },
+    {
+      path:'/home',
+      element: <HomePage />,
+    },
+    {
+      path:'/about',
+      element: <About />,
+    },
     {
       path: '*',
       element: <Navigate to="/404" replace />,
