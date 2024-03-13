@@ -2,11 +2,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable consistent-return */
 /* eslint-disable no-else-return */
+/* eslint-disable import/no-named-as-default-member */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import 'src/global.css';
-import 'src/components/homepage/index.css'
+import 'src/components/homepage/index.css';
 
 import { useScrollToTop } from 'src/hooks/use-scroll-to-top';
 

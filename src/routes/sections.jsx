@@ -8,7 +8,6 @@ import LogoOnlyLayout from 'src/layouts/auth-layout';
 import About from '../pages/About';
 import HomePage from '../pages/HomePage';
 
-
 export const IndexPage = lazy(() => import('src/pages/app'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
 export const UserPage = lazy(() => import('src/pages/user'));
@@ -22,7 +21,6 @@ export const Page404 = lazy(() => import('src/pages/page-not-found'));
 export default function Router() {
   const routes = useRoutes([
     {
-      path: 'dashboard',
       element: (
         <DashboardLayout>
           <Suspense>
@@ -31,7 +29,7 @@ export default function Router() {
         </DashboardLayout>
       ),
       children: [
-        { path: 'app', element: <IndexPage /> },
+        { path: '/', element: <IndexPage /> },
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
@@ -46,13 +44,12 @@ export default function Router() {
         { path: '404', element: <Page404 /> },
       ],
     },
-    { path: '/dashboard', element: <Navigate to="/dashboard/app" /> },
     {
-      path:'/home',
+      path: '/home',
       element: <HomePage />,
     },
     {
-      path:'/about',
+      path: '/about',
       element: <About />,
     },
     {
