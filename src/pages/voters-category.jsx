@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable  */
 import * as React from 'react';
 
 import Box from '@mui/material/Box';
@@ -12,7 +14,8 @@ import ConstructionRoundedIcon from '@mui/icons-material/ConstructionRounded';
 import SupportAgentRoundedIcon from '@mui/icons-material/SupportAgentRounded';
 import SettingsSuggestRoundedIcon from '@mui/icons-material/SettingsSuggestRounded';
 
-import { Footer, Navbar } from '../components/homepage';
+import { Footer } from '../components/homepage';
+import Navbar from 'src/components/navigation/Navbar';
 
 const items = [
   {

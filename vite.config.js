@@ -14,6 +14,7 @@ export default defineConfig({
       },
     }),
   ],
+  base: 'http://localhost:3030/',
   resolve: {
     alias: [
       {
