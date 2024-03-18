@@ -1,6 +1,6 @@
 import React from 'react';
-import { cards } from '../../src/utils/data';
 
+import { cards } from '../utils/data';
 import ContestantCard from '../components/contestantCard/card';
 
 function Contestant() {

@@ -1,15 +1,21 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './card.css';
 
-function ContestantCard({ card }) {
+function ContestantCard({ item }) {
   return (
     <Link>
-      <div className="catCard">
-        <img src="contestant.img" alt="" />
-        <span className="desc">{card.desc}</span>
-        <span className="title">{card.stageName}</span>
+      <div className="container">
+        <div className="catCard">
+          <img src={item.img} alt="" />
+          <span className="name">{item.stageName}</span>
+          <button type="button" className="button">
+            {' '}
+            Vote
+          </button>
+        </div>
       </div>
     </Link>
   );

@@ -4,6 +4,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import About from 'src/pages/About';
 import HomePage from 'src/HomePage';
 import SingUpPage from 'src/pages/signup';
+import Contestant from 'src/pages/contestants';
 import LogoOnlyLayout from 'src/layouts/auth-layout';
 import VotingCategory from 'src/pages/voters-category';
 
@@ -26,6 +27,7 @@ export default function AuthRouter() {
     { path: '/', element: <Navigate to="auth/login" replace /> },
     { path: 'home', element: <HomePage /> },
     { path: 'about', element: <About /> },
+    { path: 'contestants', element: <Contestant /> },
     { path: 'votingcategory', element: <VotingCategory /> },
   ]);
 }
