@@ -11,7 +11,7 @@ function ContestantCard({ item }) {
         <div className="catCard">
           <img src={item.img} alt="" />
           <span className="name">{item.stageName}</span>
-          <button type="button" className="button">
+          <button type="button" onClick={console.log(item.id)} className="button">
             {' '}
             Vote
           </button>
