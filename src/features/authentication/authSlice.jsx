@@ -26,7 +26,7 @@ export const login = createAsyncThunk('auth/login', async ({ email, password }, 
 const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
 const initialState = {
-  isLoggedIn: false,
+  isLoggedIn: true,
   isLoading: false,
   user: [], // for user object
   token, // for storing the JWT access token

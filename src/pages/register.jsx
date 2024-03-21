@@ -1,7 +1,12 @@
-import React from 'react';
+/* eslint-disable react/prop-types  */
+import * as React from 'react';
 
-function Register() {
-  return <div>Register for Competition</div>;
+import ContestantRegistration from './register/index';
+
+export default function Register() {
+  return (
+    <div>
+      <ContestantRegistration />
+    </div>
+  );
 }
-
-export default Register;

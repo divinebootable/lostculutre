@@ -13,7 +13,6 @@ function HomePage() {
       <About />
       <Services />
       <Tours />
-      {/* <Subscription/> */}
       <Footer />
     </>
   );

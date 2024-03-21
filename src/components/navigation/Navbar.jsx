@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-
-import { MenuRounded, CloseRounded } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 
 import './Navbar.css';
 
@@ -8,67 +8,64 @@ const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
 
   return (
-    <div className="kutora__navbar">
-      <div className="kutora__navbar-links_logo logo">
-        <span className="text">Kutora</span>
+    <div className="gpt3__navbar">
+      <div className="gpt3__navbar-links_logo logo">
+        <span className="text">LOST-CULTURE</span>
         <span className="dot">.</span>
       </div>
-      <div className="kutora__navbar-links">
-        <div className="kutora__navbar-links_container">
+      <div className="gpt3__navbar-links">
+        <div className="gpt3__navbar-links_container">
           <p>
-            <a href="#home">Home</a>
-          </p>
-          {/* <p>
-            <a href="#about">About</a>
-          </p> */}
-          <p>
-            <a href="#features">About</a>
-          </p>
-          {/* <p>
-            <a href="#faq" className="gradient__text">
-              FAQ
-            </a>
-          </p> */}
-          <p>
-            <a href="#contact">Voting</a>
+            <Link to="home">Home</Link>
           </p>
           <p>
-            <a href="#contact">Shop</a>
+            <Link to="about">About</Link>
+          </p>
+          <p>
+            <Link to="contact">Contact</Link>
+          </p>
+          <p>
+            <Link to="votingcategory">Vote Now</Link>
+          </p>
+          <p>
+            <Link to="shop">Shop</Link>
           </p>
         </div>
       </div>
-      <div className="kutora__navbar-sign">
-        <p>Login</p>
-        <button type="button">Sign up</button>
+      <div className="gpt3__navbar-sign">
+        <p>Sign in</p>
+        <button type="button">Register</button>
       </div>
-      <div className="kutora__navbar-menu">
+      <div className="gpt3__navbar-menu">
         {toggleMenu ? (
-          <CloseRounded color="#fff" size={27} onClick={() => setToggleMenu(false)} />
+          <RiCloseLine color="#fff" size={27} onClick={() => setToggleMenu(false)} />
         ) : (
-          <MenuRounded color="#fff" size={27} onClick={() => setToggleMenu(true)} />
+          <RiMenu3Line color="#fff" size={27} onClick={() => setToggleMenu(true)} />
         )}
         {toggleMenu && (
-          <div className="kutora__navbar-menu_container scale-up-center">
-            <div className="kutora__navbar-menu_container-links">
+          <div className="gpt3__navbar-menu_container scale-up-center">
+            <div className="gpt3__navbar-menu_container-links">
               <p>
-                <a href="#home">Home</a>
+                <Link to="home">Home</Link>
               </p>
               <p>
-                <a href="#about">About</a>
+                <Link to="about">About</Link>
               </p>
               <p>
-                <a href="#features">Features</a>
+                <Link to="contact">Contact</Link>
               </p>
-              {/* <p>
-                <a href="#faq">FAQ</a>
-              </p> */}
               <p>
-                <a href="#contact">Contact</a>
+                <Link to="votingcategory">Vote Now</Link>
+              </p>
+              <p>
+                <Link to="shop">Shop</Link>
               </p>
             </div>
-            <div className="kutora__navbar-menu_container-links-sign">
-              <p>Login</p>
-              <button type="button">Try for Free</button>
+            <div className="gpt3__navbar-menu_container-links-sign">
+              <p>
+                <Link to="login">Sign in</Link>
+              </p>
+              <button type="button">Sign up</button>
             </div>
           </div>
         )}

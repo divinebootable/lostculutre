@@ -16,6 +16,7 @@ import SettingsSuggestRoundedIcon from '@mui/icons-material/SettingsSuggestRound
 
 import { Footer } from '../components/homepage';
 import Navbar from 'src/components/navigation/Navbar';
+import Background from 'src/components/background/Background';
 
 const items = [
   {
@@ -54,6 +55,7 @@ export default function VotingCategory() {
   return (
     <>
       <Navbar />
+      <Background />
       <Box
         id="highlights"
         sx={{

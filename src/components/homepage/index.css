@@ -257,20 +257,20 @@ cards
   background: #000;
   justify-content:center;
   text-align: center;
-  
-
+  height: 40vh;
 }
 .card h1{
   color:#ffae00;
   padding-bottom: 25px;
-  
-  
+  padding-top: 15px;
   font-size: 30px;
 }
-.card h2{
+.card p{
   color:white;
   font-size: 20px;
   padding-bottom: 15px;
+  font-weight: 300;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /*
@@ -281,6 +281,7 @@ Hero
 
 .hero {
   min-height: 100vh;
+  width: 100vw;
   /* background: var(--clr-primary-5); */
   background:black;
   display: flex;
