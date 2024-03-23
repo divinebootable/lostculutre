@@ -30,12 +30,7 @@ const login = (email, password) => {
   };
 
   return axios
-    .post(api.SIGNIN, loginBody, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true,
-    })
+    .post(api.SIGNIN, loginBody)
     .then((data) => {
       localStorage.setItem('userToken', data.token);
       console.log(data);

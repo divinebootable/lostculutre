@@ -7,5 +7,5 @@ export default {
 
   //   REGISTRATION FOR COMPETITION
 
-  REGISTER: `${URL}register`,
+  CONTESTANTREGISTRATION: `${URL}votes/contestants`,
 };

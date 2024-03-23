@@ -1,17 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import AuthService from 'src/services/auth.service';
+import ContestantRegistrationService from 'src/services/register.service';
 
 export const register = createAsyncThunk(
   'auth/register',
-  async ({ name, gender, region_of_participation, social_media, picture }, thunkAPI) => {
+  async (
+    { name, gender, category, stage_name, facebook, youtube, instagram, photo_d },
+    thunkAPI
+  ) => {
     try {
-      const response = await AuthService.signup(
+      const response = await ContestantRegistrationService.register(
         name,
         gender,
-        region_of_participation,
-        social_media,
-        picture
+        category,
+        stage_name,
+        facebook,
+        youtube,
+        instagram,
+        photo_d
       );
       console.log('LOGIN DATA!!!!!');
       console.log(response);
@@ -27,7 +33,7 @@ export const register = createAsyncThunk(
 const initialState = {
   isLoggedIn: false,
   isLoading: false,
-  user: [], // for user object
+  contestant: [], // for contestant array
   isSuccess: false, // for monitoring the registration process.
 };
 

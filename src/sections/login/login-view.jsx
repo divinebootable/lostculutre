@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { Form, useFormik, FormikProvider } from 'formik';
 
 import Box from '@mui/material/Box';
@@ -19,7 +19,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 // import { useRouter } from 'src/routes/hooks';
 
 import { bgGradient } from 'src/theme/css';
-import { login } from 'src/features/authentication/authSlice';
+// import { login } from 'src/features/authentication/authSlice';
 
 import Iconify from 'src/components/iconify';
 
@@ -28,7 +28,7 @@ import Iconify from 'src/components/iconify';
 export default function LoginView() {
   const theme = useTheme();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -46,13 +46,13 @@ export default function LoginView() {
     onSubmit: () => {
       const { email, password } = formik.values;
       console.log(email, password);
-      dispatch(login({ email, password }))
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      // dispatch(login({ email, password }))
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
     },
   });
 
