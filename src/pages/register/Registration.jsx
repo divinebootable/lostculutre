@@ -4,29 +4,54 @@
 /* eslint-disable prefer-arrow-callback  */
 /* eslint-disable func-names  */
 /* eslint-disable arrow-body-style  */
-import React from 'react';
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import { Box, MenuItem, TextField, Typography } from '@mui/material';
+import { Box, MenuItem, useTheme, TextField, Typography, useMediaQuery } from '@mui/material';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 600,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
+import { register } from 'src/features/competionRegistration/registerSlice';
+
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: '6oovw',
+//   flexDirection: isMobile ? 'column' : 'column',
+//   bgcolor: 'background.paper',
+//   border: '2px solid #000',
+//   boxShadow: 24,
+//   p: 4,
+// };
+
+const useIsMobile = () => {
+  const theme = useTheme();
+  return useMediaQuery(theme.breakpoints.down('md'));
 };
 
 const categories = [
+  { id: 1, label: 'Center', value: 'Center' },
+  { id: 2, label: 'Littoral', value: 'Littoral' },
+  { id: 3, label: 'West', value: 'West' },
+  { id: 3, label: 'South West', value: 'South West' },
+  { id: 3, label: 'North West', value: 'North West' },
+  { id: 3, label: 'East', value: 'East' },
+];
+const Yde = [
+  { id: 1, label: 'Center', value: 'Center' },
+  { id: 2, label: 'Littoral', value: 'Littoral' },
+  { id: 3, label: 'West', value: 'West' },
+  { id: 3, label: 'South West', value: 'South West' },
+  { id: 3, label: 'North West', value: 'North West' },
+  { id: 3, label: 'East', value: 'East' },
+];
+const Dla = [
   { id: 1, label: 'Center', value: 'Center' },
   { id: 2, label: 'Littoral', value: 'Littoral' },
   { id: 3, label: 'West', value: 'West' },
@@ -44,27 +69,24 @@ const categories = [
 // }));
 
 export default function Registration() {
+  const isMobile = useIsMobile();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [successful, setSuccessfull] = React.useState(false);
-  const [photo_d, setPhoto] = React.useState('thanks');
+  const [successful, setSuccessfull] = useState(false);
+  const [photo_d, setPhoto] = React.useState(null);
 
   // const message = useSelector((state) => state.message);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const initialValues = {
     name: '',
     gender: '',
     category: '',
-    last_name: '',
-    email: '',
-    address: '',
-    phone: '',
-    password: '',
+    stage_name: '',
+    facebook: '',
+    youtube: '',
+    instagram: '',
   };
-
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -80,24 +102,22 @@ export default function Registration() {
       (val) => val && val.toString().length >= 1 && val.toString().length <= 20
     ),
     category: Yup.string().required('This field is required'),
-    last_name: Yup.string()
+    stage_name: Yup.string()
       .test(
         'len',
-        'The last_name must be between 3 and 20 characters.',
+        'The stage_name must be between 1 and 20 characters.',
         (val) => val && val.toString().length >= 3 && val.toString().length <= 20
       )
       .required('This field is required'),
-    email: Yup.string().email('This is not a valid email.').required('This field is required'),
-    address: Yup.string()
+    facebook: Yup.string().required('This field is required'),
+    youtube: Yup.string()
       .test(
         'len',
-        'The law_name must be between 3 and 50 characters.',
+        'The law_name must be between 5 and 100 characters.',
         (val) => val && val.toString().length >= 3 && val.toString().length <= 20
       )
       .required('This field is required'),
-    phone: Yup.string()
-      .matches(phoneRegExp, 'Phone number is not valid')
-      .required('This field is required'),
+    instagram: Yup.string().required('This field is required'),
     // photo_d: Yup.mixed()
     //   .required('required')
     //   .test('fileFormat', 'Only JPG, JPEG and PNG files are allowed', (value) => {
@@ -116,22 +136,34 @@ export default function Registration() {
   });
 
   const handleSubmit = (formValue) => {
+    const { name, gender, category, stage_name, facebook, instagram, youtube } = formValue;
+    console.log('PHOTO!!!!!!');
     console.log(formValue);
-    const { name, gender, category, last_name, email, password, phone, address } = formValue;
-    console.log(name, gender, category, last_name, email, password, phone, address, photo_d);
-    // await dispatch(
-    //   addUser({
-    //     first_name,
-    //     last_name,
-    //     email,
-    //     password,
-    //     address,
-    //     gender,
-    //     phone,
-    //   })
-    // );
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('gender', gender);
+    formData.append('category', category);
+    formData.append('stage_name', stage_name);
+    formData.append('facebook', facebook);
+    formData.append('instagram', instagram);
+    formData.append('youtube', youtube);
+    formData.append('photo_d', photo_d);
+    console.log(photo_d);
+    console.log('FORM!!!!');
+    console.log(formData);
+    console.log('FORM!!!!');
+    dispatch(
+      register({
+        name,
+        gender,
+        category,
+        stage_name,
+        facebook,
+        instagram,
+        youtube,
+      })
+    );
     // await dispatch(getAllUsers());
-    // await notifications(isExpertAdded);
     // handleClose();
   };
 
@@ -149,7 +181,11 @@ export default function Registration() {
         justifyContent="center"
         backgroundColor="#F6EDDD"
         borderRadius="4px"
-        sx={{ '&:hover': { cursor: 'pointer' } }}
+        sx={{
+          '&:hover': { cursor: 'pointer' },
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'column',
+        }}
         onClick={handleOpen}
       >
         <Typography component="span" variant="h5" color="white">
@@ -162,7 +198,20 @@ export default function Registration() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '6oovw',
+            flexDirection: isMobile ? 'column' : 'column',
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -177,11 +226,11 @@ export default function Registration() {
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'div'}>
                       <Box sx={{ width: '100%' }}>
-                        <Grid container spacing={6}>
-                          <Grid item xs={6}>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12} md={6} lg={5}>
                             <Box
                               sx={{
-                                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                                '& .MuiTextField-root': { m: 1, width: '20ch' },
                               }}
                               noValidate
                               autoComplete="off"
@@ -207,10 +256,10 @@ export default function Registration() {
                               </div>
                             </Box>
                           </Grid>
-                          <Grid item xs={6}>
+                          <Grid item xs={12} md={6} lg={5}>
                             <Box
                               sx={{
-                                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                                '& .MuiTextField-root': { m: 1, width: '20ch' },
                               }}
                               noValidate
                               autoComplete="off"
@@ -234,9 +283,9 @@ export default function Registration() {
                               </div>
                             </Box>
                           </Grid>
-                          <Grid item xs={6}>
+                          <Grid item xs={12} md={6} lg={5}>
                             <Box
-                              sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+                              sx={{ '& .MuiTextField-root': { m: 1, width: '20ch' } }}
                               noValidate
                               autoComplete="off"
                             >
@@ -260,10 +309,10 @@ export default function Registration() {
                               </div>
                             </Box>
                           </Grid>
-                          <Grid item xs={6}>
+                          <Grid item xs={12} md={6} lg={5}>
                             <Box
                               sx={{
-                                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                                '& .MuiTextField-root': { m: 1, width: '20ch' },
                               }}
                               noValidate
                               autoComplete="off"
@@ -272,26 +321,26 @@ export default function Registration() {
                                 <TextField
                                   className={
                                     'form-control' +
-                                    (errors.last_name && touched.last_name ? 'is-invalid' : '')
+                                    (errors.stage_name && touched.stage_name ? 'is-invalid' : '')
                                   }
-                                  label="Lastname"
+                                  label="Stage Name"
                                   id="outlined-size-small-lastname"
                                   size="small"
-                                  name="last_name"
-                                  value={values.last_name || ''}
+                                  name="stage_name"
+                                  value={values.stage_name || ''}
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  error={!!touched.last_name && !!errors.last_name}
-                                  helperText={touched.last_name && errors.last_name}
+                                  error={!!touched.stage_name && !!errors.stage_name}
+                                  helperText={touched.stage_name && errors.stage_name}
                                   required
                                 />
                               </div>
                             </Box>
                           </Grid>
-                          <Grid item xs={6}>
+                          <Grid item xs={12} md={6} lg={5}>
                             <Box
                               sx={{
-                                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                                '& .MuiTextField-root': { m: 1, width: '20ch' },
                               }}
                               noValidate
                               autoComplete="off"
@@ -300,26 +349,26 @@ export default function Registration() {
                                 <TextField
                                   className={
                                     'form-control' +
-                                    (errors.email && touched.email ? ' is-invalid' : '')
+                                    (errors.facebook && touched.facebook ? ' is-invalid' : '')
                                   }
-                                  label="Email Address"
+                                  label="FaceBook Link"
                                   id="outlined-size-small-email"
                                   size="small"
-                                  name="email"
-                                  value={values.email || ''}
+                                  name="facebook"
+                                  value={values.facebook || ''}
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  error={!!touched.email && !!errors.email}
-                                  helperText={touched.email && errors.email}
-                                  type="email"
+                                  error={!!touched.facebook && !!errors.facebook}
+                                  helperText={touched.facebook && errors.facebook}
+                                  type="text"
                                 />
                               </div>
                             </Box>
                           </Grid>
-                          <Grid item xs={6}>
+                          <Grid item xs={12} md={6} lg={5}>
                             <Box
                               sx={{
-                                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                                '& .MuiTextField-root': { m: 1, width: '20ch' },
                               }}
                               noValidate
                               autoComplete="off"
@@ -328,45 +377,17 @@ export default function Registration() {
                                 <TextField
                                   className={
                                     'form-control' +
-                                    (errors.phone && touched.phone ? ' is-invalid' : '')
+                                    (errors.youtube && touched.youtube ? ' is-invalid' : '')
                                   }
-                                  label="phonenumber"
-                                  id="phone"
-                                  size="small"
-                                  name="phone"
-                                  value={values.phone || ''}
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  error={!!touched.phone && !!errors.phone}
-                                  helperText={touched.phone && errors.phone}
-                                  type="tel"
-                                />
-                              </div>
-                            </Box>
-                          </Grid>
-                          <Grid item xs={6}>
-                            <Box
-                              sx={{
-                                '& .MuiTextField-root': { m: 1, width: '25ch' },
-                              }}
-                              noValidate
-                              autoComplete="off"
-                            >
-                              <div>
-                                <TextField
-                                  className={
-                                    'form-control' +
-                                    (errors.address && touched.address ? ' is-invalid' : '')
-                                  }
-                                  label="address"
+                                  label="Youtube Link"
                                   id="outlined-size-small"
                                   size="small"
-                                  name="address"
-                                  value={values.address || ''}
+                                  name="youtube"
+                                  value={values.youtube || ''}
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  error={!!touched.address && !!errors.address}
-                                  helperText={touched.address && errors.address}
+                                  error={!!touched.youtube && !!errors.youtube}
+                                  helperText={touched.youtube && errors.youtube}
                                 />
                               </div>
                             </Box>
@@ -396,10 +417,10 @@ export default function Registration() {
                     </div>
                   </Box>
                 </Grid> */}
-                          <Grid item xs={6}>
+                          <Grid item xs={12} md={6} lg={5}>
                             <Box
                               sx={{
-                                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                                '& .MuiTextField-root': { m: 1, width: '20ch' },
                               }}
                               noValidate
                               autoComplete="off"
@@ -408,60 +429,41 @@ export default function Registration() {
                                 <TextField
                                   className={
                                     'form-control' +
-                                    (errors.password && touched.password ? ' is-invalid' : '')
+                                    (errors.instagram && touched.instagram ? ' is-invalid' : '')
                                   }
                                   id="outlined-password-input"
-                                  label="Password"
-                                  type="password"
+                                  label="Instagrm Link"
+                                  type="text"
                                   size="small"
-                                  name="password"
-                                  value={values.password || ''}
+                                  name="instagram"
+                                  value={values.instagram || ''}
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  error={!!touched.password && !!errors.password}
-                                  helperText={touched.password && errors.password}
+                                  error={!!touched.instagram && !!errors.instagram}
+                                  helperText={touched.instagram && errors.instagram}
                                 />
                               </div>
                             </Box>
                           </Grid>
-                          <Grid item xs={6}>
+                          <Grid item xs={12} md={6} lg={5}>
                             <Box
                               sx={{
-                                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                                '& .MuiTextField-root': { m: 1, width: '20ch' },
                               }}
                               noValidate
                               autoComplete="off"
                             >
                               <div>
-                                <TextField
-                                  className={
-                                    'form-control' +
-                                    (errors.passwordConfirmation && touched.passwordConfirmation
-                                      ? ' is-invalid'
-                                      : '')
-                                  }
-                                  id="outlined-passwordConfirmation-input"
-                                  label="Confirm password"
-                                  type="password"
-                                  size="small"
-                                  name="passwordConfirmation"
-                                  value={values.passwordConfirmation || ''}
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  error={
-                                    !!touched.passwordConfirmation && !!errors.passwordConfirmation
-                                  }
-                                  helperText={
-                                    touched.passwordConfirmation && errors.passwordConfirmation
-                                  }
-                                />
+                                <h3 style={{ color: 'black', fontSize: '20px' }}>
+                                  Upload your Image below
+                                </h3>
                               </div>
                             </Box>
                           </Grid>
-                          <Grid item xs={6}>
+                          <Grid item xs={12} md={6} lg={5}>
                             <Box
                               sx={{
-                                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                                '& .MuiTextField-root': { m: 1, width: '20ch' },
                               }}
                               noValidate
                               autoComplete="off"
@@ -473,9 +475,9 @@ export default function Registration() {
                                     (errors.photo_d && touched.photo_d ? ' is-invalid' : '')
                                   }
                                   id="outlined-photo"
-                                  label="Photo Upload"
                                   type="file"
                                   size="small"
+                                  name="photo_d"
                                   onChange={imageChange}
                                   onBlur={handleBlur}
                                   error={!!touched.photo_d && !!errors.photo_d}

@@ -2,18 +2,19 @@ import axios from 'axios';
 
 import api from '../serverConfig';
 
-const register = (name, gender, category, photo_d, stage_name, facebook, youtube, instagram) => {
-  console.log(name, gender, category, photo_d, stage_name, facebook, youtube, instagram);
+const register = (name, gender, category, stage_name, facebook, instagram, youtube) => {
+  console.log('HERE');
+  console.log(name, gender, category, stage_name, facebook, instagram, youtube);
+  console.log('HERE');
   return axios
     .post(api.CONTESTANTREGISTRATION, {
       name,
       gender,
       category,
-      photo_d,
       stage_name,
       facebook,
-      youtube,
       instagram,
+      youtube,
     })
     .then((res) => {
       console.log(res);

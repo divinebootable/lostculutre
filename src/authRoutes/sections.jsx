@@ -7,6 +7,7 @@ import SingUpPage from 'src/pages/signup';
 import Contestant from 'src/pages/contestants';
 import LogoOnlyLayout from 'src/layouts/auth-layout';
 import VotingCategory from 'src/pages/voters-category';
+import RegistrationSuccess from 'src/pages/RegistrationSuccess';
 
 export const LoginPage = lazy(() => import('src/pages/login'));
 export const SignupPage = lazy(() => import('src/pages/signup'));
@@ -21,6 +22,7 @@ export default function AuthRouter() {
       children: [
         { path: 'login', element: <LoginPage /> },
         { path: 'signup', element: <SingUpPage /> },
+        { path: 'registration-success', element: <RegistrationSuccess /> },
         { path: '404', element: <Page404 /> },
       ],
     },
@@ -29,5 +31,6 @@ export default function AuthRouter() {
     { path: 'about', element: <About /> },
     { path: 'contestants', element: <Contestant /> },
     { path: 'votingcategory', element: <VotingCategory /> },
+    { path: 'registration-success', element: <RegistrationSuccess /> },
   ]);
 }

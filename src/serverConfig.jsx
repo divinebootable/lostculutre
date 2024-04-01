@@ -1,4 +1,4 @@
-const URL = `https://agro.pythonanywhere.com/`;
+const URL = `https://eupatridae1.pythonanywhere.com/`;
 
 export default {
   // AUTHENTICATION
@@ -7,5 +7,5 @@ export default {
 
   //   REGISTRATION FOR COMPETITION
 
-  CONTESTANTREGISTRATION: `${URL}votes/contestants`,
+  CONTESTANTREGISTRATION: `${URL}votes/contestants/`,
 };
