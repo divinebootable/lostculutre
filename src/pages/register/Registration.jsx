@@ -6,8 +6,8 @@
 /* eslint-disable arrow-body-style  */
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
-import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import React, { useRef, useState } from 'react';
 
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
@@ -70,11 +70,12 @@ const Dla = [
 
 export default function Registration() {
   const isMobile = useIsMobile();
-  const [open, setOpen] = React.useState(false);
+  const fileInputRef = useRef(null);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [successful, setSuccessfull] = useState(false);
-  const [photo_d, setPhoto] = React.useState(null);
+  const [photo_d, setPhoto] = useState({});
 
   // const message = useSelector((state) => state.message);
   const dispatch = useDispatch();
@@ -114,7 +115,7 @@ export default function Registration() {
       .test(
         'len',
         'The law_name must be between 5 and 100 characters.',
-        (val) => val && val.toString().length >= 3 && val.toString().length <= 20
+        (val) => val && val.toString().length >= 5 && val.toString().length <= 100
       )
       .required('This field is required'),
     instagram: Yup.string().required('This field is required'),
@@ -161,6 +162,7 @@ export default function Registration() {
         facebook,
         instagram,
         youtube,
+        photo_d,
       })
     );
     // await dispatch(getAllUsers());

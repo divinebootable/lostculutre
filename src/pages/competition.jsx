@@ -1,17 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 
-import { UserView } from 'src/sections/user/view';
+import { CompetitionView } from 'src/sections/Competition/view';
 
 // ----------------------------------------------------------------------
 
-export default function UserPage() {
+export default function CompetitionPage() {
   return (
     <>
       <Helmet>
-        <title> User | LOST CULTURE </title>
+        <title> Competition | LOST CULTURE </title>
       </Helmet>
 
-      <UserView />
+      <CompetitionView />
     </>
   );
 }

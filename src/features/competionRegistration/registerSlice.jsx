@@ -4,7 +4,10 @@ import ContestantRegistrationService from 'src/services/register.service';
 
 export const register = createAsyncThunk(
   'auth/register',
-  async ({ name, gender, category, stage_name, facebook, instagram, youtube }, thunkAPI) => {
+  async (
+    { name, gender, category, stage_name, facebook, instagram, youtube, photo_d },
+    thunkAPI
+  ) => {
     try {
       // console.log('Slice');
       // console.log(name, gender, category, stage_name, facebook, instagram, phone, youtube, photo_d);
@@ -15,7 +18,8 @@ export const register = createAsyncThunk(
         stage_name,
         facebook,
         instagram,
-        youtube
+        youtube,
+        photo_d
       );
       console.log('REG DATA!!!!!');
       console.log(response);
