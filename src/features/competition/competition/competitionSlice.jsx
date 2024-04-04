@@ -28,7 +28,7 @@ const initialState = {
   isSuccess: false, // for monitoring the registration process.
 };
 
-const authSlice = createSlice({
+const competitionSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
@@ -50,5 +50,5 @@ const authSlice = createSlice({
   },
 });
 
-const { reducer } = authSlice;
+const { reducer } = competitionSlice;
 export default reducer;

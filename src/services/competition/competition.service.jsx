@@ -5,7 +5,7 @@ import api from '../../serverConfig';
 const addCompetition = (name, start_date, end_date) => {
   console.log(name, start_date, end_date);
   return axios
-    .post(api.SIGNUP, {
+    .post(api.ADDCOMPETITION, {
       name,
       start_date,
       end_date,

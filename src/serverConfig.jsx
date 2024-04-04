@@ -8,7 +8,7 @@ export default {
   //  COMPETITION
 
   CONTESTANTREGISTRATION: `${URL}votes/contestants/`,
-  ADDCOMPETITION: `${URL}`,
+  ADDCOMPETITION: `${URL}votes/elections/`,
   ADDCATEGORY: `${URL}`,
   GETALLCATEGORIES: `${URL}`,
   GETCATEGORIESPERCOMPETITION: `${URL}`,
