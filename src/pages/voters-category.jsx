@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable  */
+/* eslint-disable */
 import * as React from 'react';
 
 import Box from '@mui/material/Box';
@@ -17,41 +17,50 @@ import SettingsSuggestRoundedIcon from '@mui/icons-material/SettingsSuggestRound
 import { Footer } from '../components/homepage';
 import Navbar from 'src/components/navigation/Navbar';
 import Background from 'src/components/background/Background';
+// import useHistory from 'react-router-dom';
 
-const items = [
-  {
-    icon: <SettingsSuggestRoundedIcon />,
-    title: 'WEST REGION',
-    description:
-      'Our product effortlessly adjusts to your needs, boosting efficiency and simplifying your tasks.',
-  },
-  {
-    icon: <ConstructionRoundedIcon />,
-    title: 'SOUTH WEST REGION',
-    description:
-      'Experience unmatched durability that goes above and beyond with lasting investment.',
-  },
-  {
-    icon: <ThumbUpAltRoundedIcon />,
-    title: 'CENTRE REGION',
-    description:
-      'Integrate our product into your routine with an intuitive and easy-to-use interface.',
-  },
-  {
-    icon: <AutoFixHighRoundedIcon />,
-    title: 'LITTORAL',
-    description:
-      'Stay ahead with features that set new standards, addressing your evolving needs better than the rest.',
-  },
-  {
-    icon: <SupportAgentRoundedIcon />,
-    title: 'EAST REGION',
-    description:
-      'Count on our responsive customer support, offering assistance that goes beyond the purchase.',
-  },
-];
 
 export default function VotingCategory() {
+  const items = [
+    {
+      icon: <SettingsSuggestRoundedIcon />,
+      title: 'WEST REGION',
+      description:
+        'Our product effortlessly adjusts to your needs, boosting efficiency and simplifying your tasks.',
+    },
+    {
+      icon: <ConstructionRoundedIcon />,
+      title: 'SOUTH WEST REGION',
+      description:
+        'Experience unmatched durability that goes above and beyond with lasting investment.',
+    },
+    {
+      icon: <ThumbUpAltRoundedIcon />,
+      title: 'CENTRE REGION',
+      description:
+        'Integrate our product into your routine with an intuitive and easy-to-use interface.',
+    },
+    {
+      icon: <AutoFixHighRoundedIcon />,
+      title: 'LITTORAL',
+      description:
+        'Stay ahead with features that set new standards, addressing your evolving needs better than the rest.',
+    },
+    {
+      icon: <SupportAgentRoundedIcon />,
+      title: 'EAST REGION',
+      description:
+        'Count on our responsive customer support, offering assistance that goes beyond the purchase.',
+    },
+  ];
+
+  // const history = useHistory();
+
+  // const handleClick = (region) => {
+  //   // Route to the next page and pass the region as props
+  //   history.push('/contestants', { region });
+  // };
+
   return (
     <>
       <Navbar />
@@ -105,6 +114,7 @@ export default function VotingCategory() {
                     backgroundColor: '#102A42',
                     cursor: 'pointer',
                   }}
+                  onClick={() => handleClick(item.title)}
                 >
                   <Box sx={{ opacity: '50%' }}>{item.icon}</Box>
                   <div>

@@ -115,7 +115,7 @@ export default function Registration() {
       .test(
         'len',
         'The law_name must be between 5 and 100 characters.',
-        (val) => val && val.toString().length >= 5 && val.toString().length <= 100
+        (val) => val && val.toString().length >= 3 && val.toString().length <= 20
       )
       .required('This field is required'),
     instagram: Yup.string().required('This field is required'),
@@ -135,12 +135,13 @@ export default function Registration() {
     //     return true;
     //   }),
   });
+  const formData = new FormData();
 
   const handleSubmit = (formValue) => {
     const { name, gender, category, stage_name, facebook, instagram, youtube } = formValue;
     console.log('PHOTO!!!!!!');
     console.log(formValue);
-    const formData = new FormData();
+
     formData.append('name', name);
     formData.append('gender', gender);
     formData.append('category', category);

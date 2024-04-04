@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
+import VotingCategory from 'src/pages/voters-category';
 import DashboardLayout from 'src/layouts/userDashboard';
 
 export const Register = lazy(() => import('src/pages/register'));
@@ -32,6 +33,7 @@ export default function RouterUser() {
         { path: '/user', element: <UserPage /> },
         { path: '/products', element: <ProductsPage /> },
         { path: '/blog', element: <BlogPage /> },
+        
       ],
     },
     {
@@ -46,6 +48,8 @@ export default function RouterUser() {
       path: '404',
       element: <Page404 />,
     },
+    { path: 'votingcategory',
+     element: <VotingCategory /> },
     {
       path: '*',
       element: <Navigate to="/404" replace />,
