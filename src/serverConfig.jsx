@@ -5,6 +5,9 @@ export default {
   SIGNUP: `${URL}signup/`,
   SIGNIN: `${URL}signin`,
 
+  // Contestants
+  ALLCONTESTANTS: `${URL}votes/contestants/`,
+
   //  COMPETITION
 
   CONTESTANTREGISTRATION: `${URL}votes/contestants/`,

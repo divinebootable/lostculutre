@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import authReducer from '../features/authentication/authSlice';
+import contestantReducer from '../features/contestants/contestantSlice';
 import regReducer from '../features/competionRegistration/registerSlice';
 import categoryReducer from '../features/competition/category/categorySlice';
 import competitionReducer from '../features/competition/competition/competitionSlice';
@@ -10,6 +11,7 @@ const rootReducer = {
   registerForCompetition: regReducer,
   competition: competitionReducer,
   category: categoryReducer,
+  contestant: contestantReducer,
 };
 
 const store = configureStore({

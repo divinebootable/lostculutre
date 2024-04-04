@@ -4,9 +4,10 @@ import CompetitionService from 'src/services/competition/competition.service';
 
 export const addCompetition = createAsyncThunk(
   'competition/addCompetition',
-  async ({ name, statrt_date, end_date }, thunkAPI) => {
+  async ({ name, start_date, end_date }, thunkAPI) => {
+    console.log(name, start_date, end_date);
     try {
-      const response = await CompetitionService.addCompetition(name, statrt_date, end_date);
+      const response = await CompetitionService.addCompetition(name, start_date, end_date);
       console.log('add Competition DATA!!!!!');
       console.log(response);
       return response;
@@ -23,7 +24,7 @@ const token = localStorage.getItem('userToken') ? localStorage.getItem('userToke
 const initialState = {
   isLoggedIn: true,
   isLoading: false,
-  cometitions: [], // for user object
+  competitions: [], // for user object
   token, // for storing the JWT access token
   isSuccess: false, // for monitoring the registration process.
 };
@@ -36,7 +37,7 @@ const competitionSlice = createSlice({
     // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(addCompetition.fulfilled, (state, action) => {
       // Add user to the state array
-      state.competition.push(action.payload);
+      state.competitions.push(action.payload);
       state.isLoading = false;
       state.isSuccess = true; // registration successful
     });

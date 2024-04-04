@@ -48,8 +48,9 @@ export default function AddCompetition() {
   });
 
   const handleSubmit = async (formValue) => {
-    const { category, start_date, end_date } = formValue;
-    await dispatch(addCompetition(category, start_date, end_date));
+    const { name, start_date, end_date } = formValue;
+    console.log(name, start_date, end_date);
+    await dispatch(addCompetition(name, start_date, end_date));
     handleClose();
   };
 
