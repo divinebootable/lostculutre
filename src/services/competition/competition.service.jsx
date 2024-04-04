@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import axios from 'axios';
 
 import api from '../../serverConfig';
@@ -19,8 +20,29 @@ const addCompetition = (name, start_date, end_date) => {
     });
 };
 
+const getAllCompetitions = () => {
+  // const AUTH_TOKEN = localStorage.getItem('authToken');
+  // const config = {
+  //   headers: {
+  //     authorization: `Bearer ${AUTH_TOKEN}`,
+  //   },
+  // };
+  return axios
+    .get(api.GETALLCOMPETITIONS)
+    .then((res) => {
+      console.log('SERVICE');
+      console.log(res);
+      return res;
+    })
+    .catch((e) => {
+      console.log(e);
+      throw e;
+    });
+};
+
 const CompetitionService = {
   addCompetition,
+  getAllCompetitions,
 };
 
 export default CompetitionService;

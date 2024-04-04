@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style  */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import CompetitionService from 'src/services/competition/competition.service';
@@ -5,8 +6,8 @@ import CompetitionService from 'src/services/competition/competition.service';
 export const addCompetition = createAsyncThunk(
   'competition/addCompetition',
   async ({ name, start_date, end_date }, thunkAPI) => {
-    console.log(name, start_date, end_date);
     try {
+      console.log(name, start_date, end_date);
       const response = await CompetitionService.addCompetition(name, start_date, end_date);
       console.log('add Competition DATA!!!!!');
       console.log(response);
@@ -19,6 +20,12 @@ export const addCompetition = createAsyncThunk(
   }
 );
 
+export const getAllCompetitions = createAsyncThunk('competition/total', async (thunkAPI) => {
+  const response = await CompetitionService.getAllCompetitions();
+  console.log(response.data);
+  return response.data;
+});
+
 const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
 const initialState = {
@@ -30,7 +37,7 @@ const initialState = {
 };
 
 const competitionSlice = createSlice({
-  name: 'auth',
+  name: 'competition',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -47,6 +54,26 @@ const competitionSlice = createSlice({
     });
     builder.addCase(addCompetition.pending, (state, action) => {
       state.isLoading = true;
+    });
+    builder.addCase(getAllCompetitions.fulfilled, (state, action) => {
+      console.log('PAYLOAD');
+      console.log(action.payload);
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.competitions.push(
+        action.payload.map((data) => {
+          console.log('Data');
+          console.log(data);
+          return data;
+        })
+      );
+    });
+    builder.addCase(getAllCompetitions.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getAllCompetitions.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = false;
     });
   },
 });

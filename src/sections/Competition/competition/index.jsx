@@ -1,5 +1,7 @@
 /* eslint-disable react/self-closing-comp  */
-import * as React from 'react';
+/* eslint-disable arrow-body-style  */
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Box } from '@mui/material';
 import Table from '@mui/material/Table';
@@ -10,15 +12,26 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 
+import { getAllCompetitions } from 'src/features/competition/competition/competitionSlice';
+
 import Header from 'src/components/Header/Header';
 
 import AddCompetition from './addCompetition';
 
-const rows = [
-  { id: 1, competition: 'Lost Culture', start_date: '02/03/2020', end_date: '10/03/2020' },
-];
+// const rows = [
+//   { id: 1, competition: 'Lost Culture', start_date: '02/03/2020', end_date: '10/03/2020' },
+// ];
 
 export default function CompetitionRegistration() {
+  const { competitions } = useSelector((store) => store.competition);
+  const dispatch = useDispatch();
+  console.log('COMPETE');
+  console.log(competitions);
+
+  useEffect(() => {
+    dispatch(getAllCompetitions());
+  }, [dispatch]);
+
   return (
     <div>
       <Box m="20px">
@@ -38,16 +51,21 @@ export default function CompetitionRegistration() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                    <TableCell component="th" scope="row">
-                      {row.id}
-                    </TableCell>
-                    <TableCell align="right">{row.competition}</TableCell>
-                    <TableCell align="right">{row.start_date}</TableCell>
-                    <TableCell align="right">{row.end_date}</TableCell>
-                  </TableRow>
-                ))}
+                {competitions.map((row) => {
+                  return row.map((competition) => (
+                    <TableRow
+                      key={competition.id}
+                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {competition.id}
+                      </TableCell>
+                      <TableCell align="right">{competition.name}</TableCell>
+                      <TableCell align="right">{competition.start_date}</TableCell>
+                      <TableCell align="right">{competition.end_date}</TableCell>
+                    </TableRow>
+                  ));
+                })}
               </TableBody>
             </Table>
           </TableContainer>
