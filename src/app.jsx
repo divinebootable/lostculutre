@@ -14,7 +14,7 @@ import { useScrollToTop } from 'src/hooks/use-scroll-to-top';
 import ThemeProvider from 'src/theme';
 import Router from 'src/routes/sections';
 import AuthRouter from './authRoutes/sections';
-// import RouterUser from './userRoutes/sections';
+import RouterUser from './userRoutes/sections';
 import CircularIndeterminate from './components/loading';
 
 // ----------------------------------------------------------------------
@@ -45,11 +45,8 @@ export default function App() {
         <Router />
       </ThemeProvider>
     ) : (
-      // <ThemeProvider>
-      //   <RouterUser />
-      // </ThemeProvider>
       <ThemeProvider>
-        <Router />
+        <RouterUser />
       </ThemeProvider>
     );
   } else {

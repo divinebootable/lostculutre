@@ -1,5 +1,7 @@
 /* eslint-disable react/self-closing-comp  */
-import * as React from 'react';
+/* eslint-disable arrow-body-style  */
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Box } from '@mui/material';
 import Table from '@mui/material/Table';
@@ -10,13 +12,24 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 
+import { getAllCategories } from 'src/features/competition/category/categorySlice';
+
 import Header from 'src/components/Header/Header';
 
 import AddCategory from './addCategory';
 
-const rows = [{ id: 1, category: 'Snow' }];
+// const rows = [{ id: 1, category: 'Snow' }];
 
 export default function ContestantRegistration() {
+  const { categories } = useSelector((store) => store.category);
+  const dispatch = useDispatch();
+  console.log('COMPETE');
+  console.log(categories);
+
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
+
   return (
     <div>
       <Box m="20px">
@@ -34,14 +47,19 @@ export default function ContestantRegistration() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                    <TableCell component="th" scope="row">
-                      {row.id}
-                    </TableCell>
-                    <TableCell align="right">{row.category}</TableCell>
-                  </TableRow>
-                ))}
+                {(categories || []).map((row) => {
+                  return row.map((category) => (
+                    <TableRow
+                      key={category.id}
+                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {category.id}
+                      </TableCell>
+                      <TableCell align="right">{category.name}</TableCell>
+                    </TableRow>
+                  ));
+                })}
               </TableBody>
             </Table>
           </TableContainer>

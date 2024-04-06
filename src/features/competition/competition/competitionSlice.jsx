@@ -21,9 +21,15 @@ export const addCompetition = createAsyncThunk(
 );
 
 export const getAllCompetitions = createAsyncThunk('competition/total', async (thunkAPI) => {
-  const response = await CompetitionService.getAllCompetitions();
-  console.log(response.data);
-  return response.data;
+  try {
+    const response = await CompetitionService.getAllCompetitions();
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log('ADD Competition EROR!!!');
+    console.log(error);
+    throw error;
+  }
 });
 
 const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;

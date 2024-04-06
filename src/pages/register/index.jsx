@@ -14,17 +14,7 @@ import Header from 'src/components/Header/Header';
 
 import Registration from './Registration';
 
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35, Status: false },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42, Status: false },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45, Status: false },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16, Status: false },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null, Status: false },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150, Status: false },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44, Status: false },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36, Status: false },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65, Status: false },
-];
+const rows = [{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35, Status: false }];
 
 export default function ContestantRegistration() {
   return (

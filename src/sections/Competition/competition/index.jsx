@@ -17,6 +17,7 @@ import { getAllCompetitions } from 'src/features/competition/competition/competi
 import Header from 'src/components/Header/Header';
 
 import AddCompetition from './addCompetition';
+import UpdateCompetition from './updateCompetition';
 
 // const rows = [
 //   { id: 1, competition: 'Lost Culture', start_date: '02/03/2020', end_date: '10/03/2020' },
@@ -48,6 +49,7 @@ export default function CompetitionRegistration() {
                   <TableCell align="right">Competition</TableCell>
                   <TableCell align="right">Start Date</TableCell>
                   <TableCell align="right">End Date</TableCell>
+                  <TableCell align="right">Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -63,6 +65,9 @@ export default function CompetitionRegistration() {
                       <TableCell align="right">{competition.name}</TableCell>
                       <TableCell align="right">{competition.start_date}</TableCell>
                       <TableCell align="right">{competition.end_date}</TableCell>
+                      <TableCell align="right">
+                        <UpdateCompetition data={competition || ''} />
+                      </TableCell>
                     </TableRow>
                   ));
                 })}

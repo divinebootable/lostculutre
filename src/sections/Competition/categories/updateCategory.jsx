@@ -4,6 +4,7 @@
 /* eslint-disable prefer-arrow-callback  */
 /* eslint-disable func-names  */
 /* eslint-disable arrow-body-style  */
+/* eslint-disable react/prop-types  */
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 import React, { useState, useEffect } from 'react';
@@ -12,8 +13,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
+import EditIcon from '@mui/icons-material/Edit';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import { Box, MenuItem, useTheme, TextField, Typography, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  MenuItem,
+  useTheme,
+  TextField,
+  Typography,
+  IconButton,
+  useMediaQuery,
+  FormControlLabel,
+} from '@mui/material';
 
 import { register } from 'src/features/competionRegistration/registerSlice';
 import { getAllCompetitions } from 'src/features/competition/competition/competitionSlice';
@@ -46,7 +57,7 @@ const useIsMobile = () => {
 //   color: theme.palette.text.secondary,
 // }));
 
-export default function AddCategory() {
+export default function AddCategory({ data }) {
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -54,15 +65,13 @@ export default function AddCategory() {
   const [successful, setSuccessfull] = useState(false);
   const [voting_image, setVotingImage] = useState(null);
   const { competitions } = useSelector((store) => store.competition);
-  console.log('Elections');
-  console.log(competitions);
 
   // const message = useSelector((state) => state.message);
   const dispatch = useDispatch();
   const initialValues = {
-    name: '',
-    voting_name: '',
-    election: '',
+    name: data.name,
+    voting_name: data.voting_name,
+    election: data.election,
   };
 
   const validationSchema = Yup.object().shape({
@@ -133,24 +142,18 @@ export default function AddCategory() {
 
   return (
     <div>
-      <Box
-        width="10%"
-        p="5px"
-        display="flex"
-        justifyContent="center"
-        backgroundColor="green"
-        borderRadius="4px"
-        sx={{
-          '&:hover': { cursor: 'pointer' },
-          display: 'flex',
-          flexDirection: isMobile ? 'column' : 'column',
-        }}
-        onClick={handleOpen}
-      >
-        <Typography variant="h5" color="white">
-          ADD CATGEGORY
-        </Typography>
-      </Box>
+      <FormControlLabel
+        control={
+          <IconButton
+            color="secondary"
+            aria-label="add an alarm"
+            sx={{ '&:hover': { cursor: 'pointer' } }}
+            onClick={handleOpen}
+          >
+            <EditIcon style={{ color: 'red' }} />
+          </IconButton>
+        }
+      />
       <Modal
         open={open}
         onClose={handleClose}
@@ -181,7 +184,7 @@ export default function AddCategory() {
                 {!successful && (
                   <div>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                      Add Category
+                      Update Category
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }} component={'div'}>
                       <Box sx={{ width: '100%' }}>
@@ -263,13 +266,11 @@ export default function AddCategory() {
                                   helperText={touched.election && errors.election}
                                   value={values.election || ''}
                                 >
-                                  {competitions.map((option) => {
-                                    return option.map((competition) => (
-                                      <MenuItem key={competition.id} value={competition.id}>
-                                        {competition.name}
-                                      </MenuItem>
-                                    ));
-                                  })}
+                                  {competitions.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                      {option.label}
+                                    </MenuItem>
+                                  ))}
                                 </TextField>
                               </div>
                             </Box>
@@ -320,7 +321,7 @@ export default function AddCategory() {
                           </Grid>
                         </Grid>
                         <Button type="submit" variant="contained" endIcon={<SaveAltIcon />}>
-                          Save
+                          update
                         </Button>
                       </Box>
                     </Typography>

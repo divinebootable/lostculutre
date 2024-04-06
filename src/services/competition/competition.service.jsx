@@ -12,6 +12,7 @@ const addCompetition = (name, start_date, end_date) => {
       end_date,
     })
     .then((res) => {
+      console.log('RES');
       console.log(res);
     })
     .catch((e) => {

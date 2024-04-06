@@ -87,6 +87,7 @@ export default function Registration() {
     facebook: '',
     youtube: '',
     instagram: '',
+    bio: '',
   };
 
   const validationSchema = Yup.object().shape({
@@ -119,6 +120,13 @@ export default function Registration() {
       )
       .required('This field is required'),
     instagram: Yup.string().required('This field is required'),
+    bio: Yup.string()
+      .test(
+        'len',
+        'The stage_name must be between 10 and 1000 characters.',
+        (val) => val && val.toString().length >= 10 && val.toString().length <= 1000
+      )
+      .required('This field is required'),
     // photo_d: Yup.mixed()
     //   .required('required')
     //   .test('fileFormat', 'Only JPG, JPEG and PNG files are allowed', (value) => {
@@ -138,7 +146,7 @@ export default function Registration() {
   const formData = new FormData();
 
   const handleSubmit = (formValue) => {
-    const { name, gender, category, stage_name, facebook, instagram, youtube } = formValue;
+    const { name, gender, category, stage_name, facebook, instagram, youtube, bio } = formValue;
     console.log('PHOTO!!!!!!');
     console.log(formValue);
 
@@ -457,8 +465,36 @@ export default function Registration() {
                               autoComplete="off"
                             >
                               <div>
+                                <TextField
+                                  className={
+                                    'form-control' +
+                                    (errors.bio && touched.bio ? ' is-invalid' : '')
+                                  }
+                                  id="outlined-password-input"
+                                  label="Your Bio"
+                                  type="text area"
+                                  size="large"
+                                  name="bio"
+                                  value={values.bio || ''}
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  error={!!touched.bio && !!errors.bio}
+                                  helperText={touched.bio && errors.bio}
+                                />
+                              </div>
+                            </Box>
+                          </Grid>
+                          <Grid item xs={12} md={6} lg={5}>
+                            <Box
+                              sx={{
+                                '& .MuiTextField-root': { m: 1, width: '20ch' },
+                              }}
+                              noValidate
+                              autoComplete="off"
+                            >
+                              <div>
                                 <h3 style={{ color: 'black', fontSize: '20px' }}>
-                                  Upload your Image below
+                                  Upload your Image
                                 </h3>
                               </div>
                             </Box>

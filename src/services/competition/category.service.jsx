@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style  */
 import axios from 'axios';
 
 import api from '../../serverConfig';
@@ -29,8 +30,29 @@ const addCategory = (name, voting_name, voting_image, election) => {
     });
 };
 
+const getAllCategories = () => {
+  // const AUTH_TOKEN = localStorage.getItem('authToken');
+  // const config = {
+  //   headers: {
+  //     authorization: `Bearer ${AUTH_TOKEN}`,
+  //   },
+  // };
+  return axios
+    .get(api.GETALLCATEGORIES)
+    .then((res) => {
+      console.log('CATEGORY');
+      console.log(res);
+      return res;
+    })
+    .catch((e) => {
+      console.log(e);
+      throw e;
+    });
+};
+
 const CategoryService = {
   addCategory,
+  getAllCategories,
 };
 
 export default CategoryService;

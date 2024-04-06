@@ -16,6 +16,18 @@ export const addCategory = createAsyncThunk(
   }
 );
 
+export const getAllCategories = createAsyncThunk('category/total', async (thunkAPI) => {
+  try {
+    const response = await CategoryService.getAllCategories();
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log('ADD Category EROR!!!');
+    console.log(error);
+    throw error;
+  }
+});
+
 const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
 const initialState = {
@@ -43,6 +55,20 @@ const categorySlice = createSlice({
     });
     builder.addCase(addCategory.pending, (state, action) => {
       state.isLoading = true;
+    });
+    builder.addCase(getAllCategories.fulfilled, (state, action) => {
+      console.log('PAYLOAD');
+      console.log(action.payload);
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.categories.push(action.payload);
+    });
+    builder.addCase(getAllCategories.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getAllCategories.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = false;
     });
   },
 });
