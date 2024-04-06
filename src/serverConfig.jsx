@@ -2,8 +2,8 @@ const URL = `https://eupatridae1.pythonanywhere.com/`;
 
 export default {
   // AUTHENTICATION
-  SIGNUP: `${URL}signup/`,
-  SIGNIN: `${URL}signin`,
+  SIGNUP: `${URL}api/accounts/signup/`,
+  SIGNIN: `${URL}api/accounts/login/`,
 
   // Contestants
   ALLCONTESTANTS: `${URL}votes/contestants/`,
