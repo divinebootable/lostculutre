@@ -12,6 +12,8 @@ import 'src/components/homepage/index.css';
 
 import { useScrollToTop } from 'src/hooks/use-scroll-to-top';
 
+// import { useRouter } from 'src/routes/hooks';
+
 import ThemeProvider from 'src/theme';
 import Router from 'src/routes/sections';
 import AuthRouter from './authRoutes/sections';
@@ -25,27 +27,30 @@ import CircularIndeterminate from './components/loading';
 export default function App() {
   const { isLoading, isLoggedIn } = useSelector((state) => state.auth);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [control, setControll] = useState(false);
+
+  // const router = useRouter();
 
   // const dispatch = useDispatch();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('userData'));
-    console.log(user);
-    console.log(isLoggedIn);
-    console.log(user.is_superuser);
-    if (user) {
+    if (user !== null) {
       try {
         return user.is_superuser === true ? setIsAdmin(true) : setIsAdmin(false);
       } catch (error) {
         console.log('error error');
         return error;
       }
+    } else {
+      setControll(true);
     }
   }, []);
 
   useScrollToTop();
 
   if (isLoading) return <CircularIndeterminate />;
+  if (control) return <AuthRouter />;
 
   if (isLoggedIn) {
     return isAdmin ? (

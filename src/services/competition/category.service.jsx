@@ -5,6 +5,7 @@ import api from '../../serverConfig';
 
 const addCategory = (name, voting_name, voting_image, election) => {
   console.log(name, voting_name, voting_image, election);
+  const AUTH_TOKEN = localStorage.getItem('userToken');
   return axios
     .post(
       api.SIGNUP,
@@ -17,7 +18,7 @@ const addCategory = (name, voting_name, voting_image, election) => {
       {
         headers: {
           'Content-Type': 'multipart/form-data;',
-          // 'Authorization': `Basic ${token}`
+          authorization: `token ${AUTH_TOKEN}`,
         },
       }
     )
@@ -31,14 +32,14 @@ const addCategory = (name, voting_name, voting_image, election) => {
 };
 
 const getAllCategories = () => {
-  // const AUTH_TOKEN = localStorage.getItem('authToken');
-  // const config = {
-  //   headers: {
-  //     authorization: `Bearer ${AUTH_TOKEN}`,
-  //   },
-  // };
+  const AUTH_TOKEN = localStorage.getItem('userToken');
+  const config = {
+    headers: {
+      authorization: `token ${AUTH_TOKEN}`,
+    },
+  };
   return axios
-    .get(api.GETALLCATEGORIES)
+    .get(api.GETALLCATEGORIES, config)
     .then((res) => {
       console.log('CATEGORY');
       console.log(res);

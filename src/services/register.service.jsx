@@ -16,6 +16,8 @@ const register = (
   console.log('HERE');
   console.log(name, gender, category, stage_name, facebook, instagram, youtube, bio);
   console.log('HERE');
+  const AUTH_TOKEN = localStorage.getItem('userToken');
+
   return axios
     .post(
       api.CONTESTANTREGISTRATION,
@@ -33,7 +35,7 @@ const register = (
       {
         headers: {
           'Content-Type': 'multipart/form-data;',
-          // 'Authorization': `Basic ${token}`
+          authorization: `token ${AUTH_TOKEN}`,
         },
       }
     )

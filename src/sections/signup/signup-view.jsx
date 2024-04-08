@@ -64,14 +64,8 @@ export default function SignUpView() {
     onSubmit: () => {
       const { first_name, last_name, email, password } = formik.values;
       console.log(first_name, last_name, email, password);
-      dispatch(signup({ first_name, last_name, email, password }))
-        .then((res) => {
-          console.log(res);
-          router.push('registration-success');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      dispatch(signup({ first_name, last_name, email, password }));
+      router.push('/registration-success');
     },
   });
 
