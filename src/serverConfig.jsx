@@ -4,6 +4,7 @@ export default {
   // AUTHENTICATION
   SIGNUP: `${URL}api/accounts/signup/`,
   SIGNIN: `${URL}api/accounts/login/`,
+  GETUSER: `${URL}api/accounts/users/me/`,
 
   // Contestants
   ALLCONTESTANTS: `${URL}votes/contestants/`,

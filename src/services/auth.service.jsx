@@ -29,10 +29,12 @@ const login = (email, password) => {
 
   return axios
     .post(api.SIGNIN, loginBody)
-    .then((data) => {
-      localStorage.setItem('userToken', data.token);
-      console.log(data);
-      return data;
+    .then((res) => {
+      console.log('LOGIN DATA');
+      console.log(res);
+      localStorage.setItem('userToken', res.data.token);
+      localStorage.setItem('userData', JSON.stringify(res.data.user_info));
+      return res.data;
     })
     .catch((e) => {
       throw e;

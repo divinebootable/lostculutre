@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-catch */
+/* eslint-disable consistent-return */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import AuthService from 'src/services/auth.service';
@@ -23,13 +25,27 @@ export const login = createAsyncThunk('auth/login', async ({ email, password }, 
   }
 });
 
-const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
+export const checkIfUserLoggedIn = createAsyncThunk(
+  'auth/checkIfUserLoggedIn',
+  async (_, thunkAPI) => {
+    try {
+      const user = JSON.parse(localStorage.getItem('userData'));
+      if (user.is_superuser === true) {
+        return true;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+// const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
 const initialState = {
   isLoggedIn: false,
   isLoading: false,
   user: [], // for user object
-  token, // for storing the JWT access token
+  token: localStorage.getItem('userToken') || null,
   isSuccess: false, // for monitoring the registration process.
 };
 
@@ -55,7 +71,6 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.isLoggedIn = true;
       state.user = action.payload.token;
-      state.user.push(action.payload);
     });
     builder.addCase(login.pending, (state, action) => {
       state.isLoading = true;
@@ -63,6 +78,9 @@ const authSlice = createSlice({
     builder.addCase(login.rejected, (state, action) => {
       state.isLoading = false;
       state.isLoggedIn = false;
+    });
+    builder.addCase(checkIfUserLoggedIn.fulfilled, (state, action) => {
+      state.isLoggedIn = true;
     });
   },
 });

@@ -16,7 +16,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { alpha, useTheme } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 
-// import { useRouter } from 'src/routes/hooks';
+import { useRouter } from 'src/routes/hooks';
 
 import { bgGradient } from 'src/theme/css';
 import { signup } from 'src/features/authentication/authSlice';
@@ -30,7 +30,7 @@ import Iconify from 'src/components/iconify';
 export default function SignUpView() {
   const theme = useTheme();
 
-  //   const router = useRouter()
+  const router = useRouter();
   // const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -67,6 +67,7 @@ export default function SignUpView() {
       dispatch(signup({ first_name, last_name, email, password }))
         .then((res) => {
           console.log(res);
+          router.push('registration-success');
         })
         .catch((err) => {
           console.log(err);
