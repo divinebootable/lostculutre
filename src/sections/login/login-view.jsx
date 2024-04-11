@@ -43,10 +43,10 @@ export default function LoginView() {
       password: '',
     },
     validationSchema: RegisterSchema,
-    onSubmit: () => {
+    onSubmit: async () => {
       const { email, password } = formik.values;
       console.log(email, password);
-      dispatch(login({ email, password }));
+      await dispatch(login({ email, password }));
       router.push('/');
     },
   });

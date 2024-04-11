@@ -6,16 +6,25 @@
 /* eslint-disable arrow-body-style  */
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
-import { useDispatch } from 'react-redux';
-import React, { useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import { Box, MenuItem, useTheme, TextField, Typography, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  MenuItem,
+  useTheme,
+  Snackbar,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
 
 import { register } from 'src/features/competionRegistration/registerSlice';
+import { getAllCategories } from 'src/features/competition/category/categorySlice';
 
 // const style = {
 //   position: 'absolute',
@@ -35,30 +44,30 @@ const useIsMobile = () => {
   return useMediaQuery(theme.breakpoints.down('md'));
 };
 
-const categories = [
-  { id: 1, label: 'Center', value: 'Center' },
-  { id: 2, label: 'Littoral', value: 'Littoral' },
-  { id: 3, label: 'West', value: 'West' },
-  { id: 3, label: 'South West', value: 'South West' },
-  { id: 3, label: 'North West', value: 'North West' },
-  { id: 3, label: 'East', value: 'East' },
-];
-const Yde = [
-  { id: 1, label: 'Center', value: 'Center' },
-  { id: 2, label: 'Littoral', value: 'Littoral' },
-  { id: 3, label: 'West', value: 'West' },
-  { id: 3, label: 'South West', value: 'South West' },
-  { id: 3, label: 'North West', value: 'North West' },
-  { id: 3, label: 'East', value: 'East' },
-];
-const Dla = [
-  { id: 1, label: 'Center', value: 'Center' },
-  { id: 2, label: 'Littoral', value: 'Littoral' },
-  { id: 3, label: 'West', value: 'West' },
-  { id: 3, label: 'South West', value: 'South West' },
-  { id: 3, label: 'North West', value: 'North West' },
-  { id: 3, label: 'East', value: 'East' },
-];
+// const categories = [
+//   { id: 1, label: 'Center', value: 'Center' },
+//   { id: 2, label: 'Littoral', value: 'Littoral' },
+//   { id: 3, label: 'West', value: 'West' },
+//   { id: 3, label: 'South West', value: 'South West' },
+//   { id: 3, label: 'North West', value: 'North West' },
+//   { id: 3, label: 'East', value: 'East' },
+// ];
+// const Yde = [
+//   { id: 1, label: 'Center', value: 'Center' },
+//   { id: 2, label: 'Littoral', value: 'Littoral' },
+//   { id: 3, label: 'West', value: 'West' },
+//   { id: 3, label: 'South West', value: 'South West' },
+//   { id: 3, label: 'North West', value: 'North West' },
+//   { id: 3, label: 'East', value: 'East' },
+// ];
+// const Dla = [
+//   { id: 1, label: 'Center', value: 'Center' },
+//   { id: 2, label: 'Littoral', value: 'Littoral' },
+//   { id: 3, label: 'West', value: 'West' },
+//   { id: 3, label: 'South West', value: 'South West' },
+//   { id: 3, label: 'North West', value: 'North West' },
+//   { id: 3, label: 'East', value: 'East' },
+// ];
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -70,13 +79,15 @@ const Dla = [
 
 export default function Registration() {
   const isMobile = useIsMobile();
-  const fileInputRef = useRef(null);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [regSuccess, setRegSuccess] = useState(false);
   const [successful, setSuccessfull] = useState(false);
   const [photo_d, setPhoto] = useState({});
-
+  const { categories } = useSelector((store) => store.category);
+  console.log('categories');
+  console.log(categories);
   // const message = useSelector((state) => state.message);
   const dispatch = useDispatch();
   const initialValues = {
@@ -116,7 +127,7 @@ export default function Registration() {
       .test(
         'len',
         'The law_name must be between 5 and 100 characters.',
-        (val) => val && val.toString().length >= 3 && val.toString().length <= 20
+        (val) => val && val.toString().length >= 3 && val.toString().length <= 100
       )
       .required('This field is required'),
     instagram: Yup.string().required('This field is required'),
@@ -145,7 +156,7 @@ export default function Registration() {
   });
   const formData = new FormData();
 
-  const handleSubmit = (formValue) => {
+  const handleSubmit = async (formValue) => {
     const { name, gender, category, stage_name, facebook, instagram, youtube, bio } = formValue;
     console.log('PHOTO!!!!!!');
     console.log(formValue);
@@ -162,18 +173,24 @@ export default function Registration() {
     console.log('FORM!!!!');
     console.log(formData);
     console.log('FORM!!!!');
-    dispatch(
-      register({
-        name,
-        gender,
-        category,
-        stage_name,
-        facebook,
-        instagram,
-        youtube,
-        photo_d,
-      })
-    );
+    try {
+      await dispatch(
+        register({
+          name,
+          gender,
+          category,
+          stage_name,
+          facebook,
+          instagram,
+          youtube,
+          photo_d,
+        })
+      );
+      setRegSuccess(true);
+    } catch (error) {
+      setRegSuccess(false);
+      throw error;
+    }
     // await dispatch(getAllUsers());
     // handleClose();
   };
@@ -182,6 +199,10 @@ export default function Registration() {
     console.log(e.target.files[0]);
     setPhoto(e.target.files[0]);
   };
+
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
 
   return (
     <div>
@@ -311,11 +332,13 @@ export default function Registration() {
                                   helperText={touched.category && errors.category}
                                   value={values.category || ''}
                                 >
-                                  {categories.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                      {option.label}
-                                    </MenuItem>
-                                  ))}
+                                  {categories.map((option) => {
+                                    return option.map((category) => (
+                                      <MenuItem key={category.id} value={category.id}>
+                                        {category.name}
+                                      </MenuItem>
+                                    ));
+                                  })}
                                 </TextField>
                               </div>
                             </Box>
@@ -472,7 +495,8 @@ export default function Registration() {
                                   }
                                   id="outlined-password-input"
                                   label="Your Bio"
-                                  type="text area"
+                                  type="text"
+                                  multiline
                                   size="large"
                                   name="bio"
                                   value={values.bio || ''}
@@ -539,6 +563,13 @@ export default function Registration() {
           </Formik>
         </Box>
       </Modal>
+      {/* Notification Snackbar */}
+      <Snackbar
+        open={regSuccess}
+        autoHideDuration={6000}
+        onClose={() => setRegSuccess(false)}
+        message="Registration Successful"
+      />
     </div>
   );
 }

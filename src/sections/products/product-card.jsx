@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars  */
+/* eslint-disable unused-imports/no-unused-imports  */
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -11,22 +13,30 @@ import Typography from '@mui/material/Typography';
 
 import { fCurrency } from 'src/utils/format-number';
 
+import { buyProduct } from 'src/features/shop/shopSlice';
+
 import Label from 'src/components/label';
 import { ColorPreview } from 'src/components/color-utils';
 
 // ----------------------------------------------------------------------
 
 export default function ShopProductCard({ product }) {
-    const buttonStyle = {
-      backgroundColor: 'grey', // Set the desired background color here
-      color: 'white', // Set the text color
-    };
-    const [quantity, setQuantity] = useState(null); // State for the input field
+  const buttonStyle = {
+    backgroundColor: 'grey', // Set the desired background color here
+    color: 'white', // Set the text color
+  };
+  const [quantity, setQuantity] = useState(null); // State for the input field
 
- 
+  const initialValues = {
+    contestant: '',
+    size: '',
+    amount: '',
+    number: '',
+    gender: '',
+  };
 
   const handleQuantityChange = (event) => {
-    const {value} = event.target;
+    const { value } = event.target;
     setQuantity(value);
   };
   const renderStatus = (
@@ -76,11 +86,7 @@ export default function ShopProductCard({ product }) {
       {fCurrency(product.price)}
     </Typography>
   );
-  const renderSize = (
-    <Typography variant="subtitle1">
-      {product.size}
-    </Typography>
-  );
+  const renderSize = <Typography variant="subtitle1">{product.size}</Typography>;
 
   return (
     <Card>
@@ -112,10 +118,9 @@ export default function ShopProductCard({ product }) {
           }}
         />
         <Button size="medium" style={buttonStyle}>
-      Buy
-    </Button>
+          Buy
+        </Button>
       </Stack>
-     
     </Card>
   );
 }

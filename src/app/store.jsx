@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import shopReducer from '../features/shop/shopSlice';
 import authReducer from '../features/authentication/authSlice';
 import contestantReducer from '../features/contestants/contestantSlice';
 import regReducer from '../features/competionRegistration/registerSlice';
@@ -12,6 +13,7 @@ const rootReducer = {
   competition: competitionReducer,
   category: categoryReducer,
   contestant: contestantReducer,
+  shop: shopReducer,
 };
 
 const store = configureStore({

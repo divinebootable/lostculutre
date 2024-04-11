@@ -28,7 +28,7 @@ export default function App() {
   const { isLoading, isLoggedIn } = useSelector((state) => state.auth);
   const [isAdmin, setIsAdmin] = useState(false);
   const [control, setControll] = useState(false);
-
+  console.log(control);
   // const router = useRouter();
 
   // const dispatch = useDispatch();
@@ -37,6 +37,7 @@ export default function App() {
     const user = JSON.parse(localStorage.getItem('userData'));
     if (user !== null) {
       try {
+        setControll(false);
         return user.is_superuser === true ? setIsAdmin(true) : setIsAdmin(false);
       } catch (error) {
         console.log('error error');

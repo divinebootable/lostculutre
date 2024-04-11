@@ -14,7 +14,11 @@ export default {
   CONTESTANTREGISTRATION: `${URL}votes/contestants/`,
   ADDCOMPETITION: `${URL}votes/elections/`,
   ADDCATEGORY: `${URL}`,
-  GETALLCATEGORIES: `${URL}`,
+  GETALLCATEGORIES: `${URL}votes/categories`,
   GETCATEGORIESPERCOMPETITION: `${URL}`,
   GETALLCOMPETITIONS: `${URL}votes/elections/`,
+
+  // Votes
+
+  BUYPRODUCT: `${URL}votes/votes/buyproduct/`,
 };
